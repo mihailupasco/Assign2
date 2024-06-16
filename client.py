@@ -201,12 +201,20 @@ def sign_up():
 sign_up_button = tk.Button(app, text="Sign Up", command=sign_up)
 sign_up_button.pack()
 
-
-def handle_client(id):
+def destroy():
     for widget in app.winfo_children():
         widget.destroy()
+
+
+def handle_client(id):
+    destroy()
     print("You are in the game")
     print(id)
+    def play_game():
+        s.send(str(str(id)+"Play").encode('utf-8'))
+        destroy()
+    play_button = tk.Button(app, text="Play", command=play_game)
+    play_button.pack()
 
 
 

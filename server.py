@@ -97,24 +97,16 @@ def handleclient(address, client_socket):
                 break
             else:
                 print("The value is not an integer.")
-    print(id)
+    game(id, address, client_socket)
+
+
+waiting_list = 0
+
+def game(id, address, client_socket):
     while True:
-        pass
-
-
-def game(address, client_socket):
-    print("A client from address", address, "Just connected")
-    # asking for the name
-
-    client_socket.sendall("Do you want to play a game? (Y/N)\n".encode("utf-8"))
-    answer = client_socket.recv(1024).decode("utf-8")
-    if answer == "Y":
-        print("we enter the loop")
-        flag = 0
-        while waiting_list < 2:
-            if flag == 0:
-                client_socket.sendall("We are waiting for another player to join, currently 1/2".encode("utf-8"))
-                flag = 1
+        a = client_socket.recv(1024).decode("utf-8")
+        if a[1:] == "Play":
+            print(a)
 
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
