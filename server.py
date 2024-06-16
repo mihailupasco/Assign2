@@ -30,9 +30,11 @@ def login(client_socket):
                 time.sleep(0.5)
                 client_socket.send(str(row[0]).encode("utf-8"))
                 print("Log In went successfully")
+                return row[0]
         if flag == 0:
             print("Invalid username or password")
             client_socket.send("no".encode("utf-8"))
+            return 0
     except sqlite3.Error as error:
         print("Error while connecting to SQLite", error)
 
@@ -66,6 +68,7 @@ def signup(client_socket):
         client_socket.send("yes".encode("utf-8"))
         time.sleep(0.5)
         client_socket.send(str(id).encode("utf-8"))
+        return id
 
 
     except sqlite3.Error as error:
@@ -74,15 +77,30 @@ def signup(client_socket):
         client_socket.send("no".encode("utf-8"))
         # Rolling back in case of error
         connection.rollback()
+    return 0
 
 
 def handleclient(address, client_socket):
     while True:
         ans = client_socket.recv(1024).decode("utf")
         if ans == "Log":
-            login(client_socket)
+            id = login(client_socket)
+            if id != 0:
+                print("The value is an integer.")
+                break
+            else:
+                print("The value is not an integer.")
         if ans == "Signup":
-            signup(client_socket)
+            id = signup(client_socket)
+            if id != 0:
+                print("The value is an integer.")
+                break
+            else:
+                print("The value is not an integer.")
+    print(id)
+    while True:
+        pass
+
 
 def game(address, client_socket):
     print("A client from address", address, "Just connected")
@@ -100,7 +118,7 @@ def game(address, client_socket):
 
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.bind(("localhost", 9000))
+s.bind(("localhost", 8000))
 s.listen()
 query = "SELECT id FROM Person"
 connection = sqlite3.connect('data.db')
