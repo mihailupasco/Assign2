@@ -4,7 +4,6 @@ import threading
 import time
 import sqlite3
 
-waiting_list = 0
 
 
 def login(client_socket):
@@ -101,16 +100,57 @@ def handleclient(address, client_socket):
 
 
 waiting_list = 0
+rooms = []
 
 def game(id, address, client_socket):
+    global waiting_list
+    our_players_and_numbers = [[0, 0], [0, 0]]
+    # In this 2 while loops we connect the players to the game
     while True:
         a = client_socket.recv(1024).decode("utf-8")
-        if a[1:] == "Play":
-            print(a)
+        if a[-4:] == "Play":
+            if a[:-4] == str(id):
+                if waiting_list %2 == 0:
+                    waiting_list += 1
+                    rooms.append([id])
+                    print("player ", id, " is waiting")
+                    break
+                else:
+                    waiting_list += 1
+                    rooms[-1].append(id)
+                    print("player ", id, " entered the game", rooms[-1])
+                    break
+    our_room_index = len(rooms) - 1
+
+    while True:
+        if len(rooms[-1]) == 2:
+            our_players_and_numbers[0][0] = rooms[-1][0]
+            our_players_and_numbers[1][0] = rooms[-1][1]
+            rooms[-1] = our_players_and_numbers
+            print("The game has started", rooms[our_room_index])
+            client_socket.send("The game has started".encode("utf-8"))
+            break
+    while True:
+        response = client_socket.recv(1024).decode("utf-8")
+        if int(response[:-4]) == id:
+            if rooms[our_room_index][0][0][0] == id:
+                rooms[our_room_index][0][0][1] = int(response[-4:])
+            else:
+                rooms[our_room_index][1][0][1] = int(response[-4:])
+            break
+    print(rooms[our_room_index])
+    for i in range(10):
+        time.sleep(0.3)
+        client_socket.send(str(str(rooms[our_room_index][0][0][0]) + str(rooms[our_room_index][1][0][1])).encode("utf-8"))
+        time.sleep(0.3)
+        client_socket.send(str(str(rooms[our_room_index][1][0][0]) + str(rooms[our_room_index][0][0][1])).encode("utf-8"))
+
+
+
 
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.bind(("localhost", 8000))
+s.bind(("localhost", 9000))
 s.listen()
 query = "SELECT id FROM Person"
 connection = sqlite3.connect('data.db')
