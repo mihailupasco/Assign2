@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6768f95-be99-4cd2-b520-d0f9adc7f0d1" name="Changes" comment="changes">
+    <list default="true" id="a6768f95-be99-4cd2-b520-d0f9adc7f0d1" name="Changes" comment="Almost all works perfectly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
@@ -186,7 +186,15 @@
       <workItem from="1718504652282" duration="3904000" />
       <workItem from="1718508811294" duration="1143000" />
       <workItem from="1718545957789" duration="13373000" />
-      <workItem from="1718585745742" duration="2214000" />
+      <workItem from="1718585745742" duration="2412000" />
+      <workItem from="1718650394993" duration="164000" />
+      <workItem from="1718654532527" duration="68000" />
+      <workItem from="1718654607613" duration="15000" />
+      <workItem from="1718657316604" duration="106000" />
+      <workItem from="1718705861700" duration="2911000" />
+      <workItem from="1718710929342" duration="30000" />
+      <workItem from="1718734743872" duration="629000" />
+      <workItem from="1718978782739" duration="11835000" />
     </task>
     <task id="LOCAL-00001" summary="server + db">
       <option name="closed" value="true" />
@@ -220,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718509894561</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Almost all works perfectly">
+      <option name="closed" value="true" />
+      <created>1718588064884</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718588064884</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,12 +258,13 @@
     <MESSAGE value="login and sign up working amazing" />
     <MESSAGE value="After loging in or signing up successfully we enter the loop in the handle client knowing the id of the user that just logged in." />
     <MESSAGE value="changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes" />
+    <MESSAGE value="Almost all works perfectly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Almost all works perfectly" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Assign2$login.coverage" NAME="login Coverage Results" MODIFIED="1716608502830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Assign2$client.coverage" NAME="client Coverage Results" MODIFIED="1718587885138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Assign2$client.coverage" NAME="client Coverage Results" MODIFIED="1719018824949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Assign2$app.coverage" NAME="app Coverage Results" MODIFIED="1716769645323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Assign2$server.coverage" NAME="server Coverage Results" MODIFIED="1718587876593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Assign2$server.coverage" NAME="server Coverage Results" MODIFIED="1719018818660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

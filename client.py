@@ -6,8 +6,6 @@ from tkinter import messagebox
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(("localhost", 9000))
 
-
-
 username = str()
 password = str()
 
@@ -16,12 +14,8 @@ app.geometry("400x500")
 app.title("Guess the Code Game")
 
 # Label for instructions
-
-
 instruction_label = tk.Label(app, text="Log in")
 instruction_label.pack()
-
-
 
 def on_entry_click_username(event):
     """Function to be called when the entry box is clicked"""
@@ -70,7 +64,6 @@ def log_in():
         time.sleep(0.5)
         s.send(passWord.encode('utf-8'))
 
-        print(userName, passWord)
 
         fromServer = s.recv(1024).decode('utf-8')
         if fromServer == "yes":
@@ -194,7 +187,6 @@ def sign_up():
         else:
             messagebox.showinfo("Info", f"You are signed up unsuccessfully, try again")
 
-
     send_data = tk.Button(app, text="Sign Up", command=send_data)
     send_data.pack()
 
@@ -214,7 +206,6 @@ class Game:
             aux = s.recv(1024).decode('utf-8')
             if aux[:-4] == str(id):
                 self.__target_number = int(aux[-4:])
-                print(self.__target_number)
                 break
     def game_itself(self):
         destroy()
@@ -223,7 +214,7 @@ class Game:
         main_frame.pack(expand=True, fill=tk.BOTH)
 
         # Top center the instruction label
-        instruction_label = tk.Label(main_frame, text="Choose a 4 digit number for your opponent to guess")
+        instruction_label = tk.Label(main_frame, text="Guess the 4 digit number")
         instruction_label.pack(pady=10)
 
         # Frame to hold the entry boxes and center them horizontally
@@ -232,29 +223,96 @@ class Game:
 
         entry_width = 5
 
+        def on_entry_num1(event):
+            num1.delete(0, "end")  # delete all the text in the entry
+            num1.insert(0, '')  # Insert blank for user input
+            num1.config(fg='white')
+
+        def on_entry_num2(event):
+            num2.delete(0, "end")  # delete all the text in the entry
+            num2.insert(0, '')  # Insert blank for user input
+            num2.config(fg='white')
+
+        def on_entry_num3(event):
+            num3.delete(0, "end")  # delete all the text in the entry
+            num3.insert(0, '')  # Insert blank for user input
+            num3.config(fg='white')
+
+        def on_entry_num4(event):
+            num4.delete(0, "end")  # delete all the text in the entry
+            num4.insert(0, '')  # Insert blank for user input
+            num4.config(fg='white')
+
         num1 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num1.insert(index=0, string='1')
+        num1.bind('<FocusIn>', on_entry_num1)
         num1.pack(side=tk.LEFT, padx=5, pady=10)
 
         num2 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num2.insert(index=0, string='2')
+        num2.bind('<FocusIn>', on_entry_num2)
         num2.pack(side=tk.LEFT, padx=5, pady=10)
 
         num3 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num3.insert(index=0, string='3')
+        num3.bind('<FocusIn>', on_entry_num3)
         num3.pack(side=tk.LEFT, padx=5, pady=10)
 
         num4 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num4.insert(index=0, string='4')
+        num4.bind('<FocusIn>', on_entry_num4)
         num4.pack(side=tk.LEFT, padx=5, pady=10)
 
         def guess():
+            def fun_game(a, b):
+                count = 0
+                a = str(a)
+                b = str(b)
+                for i in range(4):
+                    if a[i] == b[i]:
+                        count += 1
+                return count
+            if len(str(num1.get() + num2.get() + num3.get() + num4.get())) != 4:
+                messagebox.showinfo("Info", f"The number is not valid, Please enter a 4 digit number")
+                return
+            s.send(str(str(self.id) + "get_info").encode('utf-8'))
+            time.sleep(0.1)
+            aux = s.recv(1024).decode('utf-8')
+            if aux == str(str(self.id) + "lost"):
+                messagebox.showinfo("Info", f"The game is over \n The number was {self.__target_number}, You lost")
+                instruction_label = tk.Label(app, text="If you want to play again, restart the game")
+                instruction_label.pack()
+                destroy()
+                return
+
             result = int(num1.get() + num2.get() + num3.get() + num4.get())
             if result == self.__target_number:
-                messagebox.showinfo("Info", f"You have won the game")
-            else:
-                messagebox.showinfo("Info", f"Try again")
+                s.send(str(str(self.id) + "get_info").encode('utf-8'))
+                aux = s.recv(1024).decode('utf-8')
+                if aux == str(str(self.id) + "lost"):
+                    messagebox.showinfo("Info", f"The game is over \n The number was {self.__target_number}, You lost")
+                    destroy()
+                    instruction_label = tk.Label(app, text="If you want to play again, restart the game")
+                    instruction_label.pack()
+                    app.update_idletasks()
+                    return
 
+                messagebox.showinfo("Info", f"You have won the game !!!")
+                s.send(str(str(self.id) + "win").encode('utf-8'))
+                destroy()
+                instruction_label = tk.Label(app, text="If you want to play again, restart the game")
+                instruction_label.pack()
+            else:
+                s.send(str(str(self.id) + "get_info").encode('utf-8'))
+                aux = s.recv(1024).decode('utf-8')
+                if aux == str(str(self.id) + "lost"):
+                    messagebox.showinfo("Info", f"The game is over \n The number was {self.__target_number}, You lost")
+                    destroy()
+                    instruction_label = tk.Label(app, text="If you want to play again, restart the game")
+                    instruction_label.pack()
+                    app.update_idletasks()
+                    return
+                messagebox.showinfo("Info", f"You got {fun_game(result, self.__target_number)} digits right Try again")
         submit_button = tk.Button(main_frame, text="Submit", command=guess)
         submit_button.pack(pady=10)
         app.update_idletasks()
@@ -262,18 +320,17 @@ class Game:
 
 def handle_client(id):
     destroy()
-    print("You are in the game")
-    print(id)
+    print("You are in the game", id)
     def play_game():
         s.send(str(str(id)+"Play").encode('utf-8'))
         destroy()
-
+        app.update_idletasks()
         while True:
             aux = s.recv(1024).decode('utf-8')
             if aux == "The game has started":
                 print("The game has started")
                 break
-
+        destroy()
 
         main_frame = tk.Frame(app)
         main_frame.pack(expand=True, fill=tk.BOTH)
@@ -288,20 +345,44 @@ def handle_client(id):
 
         entry_width = 5
 
+        def on_entry_num1(event):
+            num1.delete(0, "end")  # delete all the text in the entry
+            num1.insert(0, '')  # Insert blank for user input
+            num1.config(fg='white')
+
+        def on_entry_num2(event):
+            num2.delete(0, "end")  # delete all the text in the entry
+            num2.insert(0, '')  # Insert blank for user input
+            num2.config(fg='white')
+
+        def on_entry_num3(event):
+            num3.delete(0, "end")  # delete all the text in the entry
+            num3.insert(0, '')  # Insert blank for user input
+            num3.config(fg='white')
+
+        def on_entry_num4(event):
+            num4.delete(0, "end")  # delete all the text in the entry
+            num4.insert(0, '')  # Insert blank for user input
+            num4.config(fg='white')
+
         num1 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num1.insert(index=0, string='1')
+        num1.bind('<FocusIn>', on_entry_num1)
         num1.pack(side=tk.LEFT, padx=5, pady=10)
 
         num2 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num2.insert(index=0, string='2')
+        num2.bind('<FocusIn>', on_entry_num2)
         num2.pack(side=tk.LEFT, padx=5, pady=10)
 
         num3 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num3.insert(index=0, string='3')
+        num3.bind('<FocusIn>', on_entry_num3)
         num3.pack(side=tk.LEFT, padx=5, pady=10)
 
         num4 = tk.Entry(entry_frame, fg='grey', width=entry_width)
         num4.insert(index=0, string='4')
+        num4.bind('<FocusIn>', on_entry_num4)
         num4.pack(side=tk.LEFT, padx=5, pady=10)
 
         def send():
@@ -315,19 +396,13 @@ def handle_client(id):
         submit_button.pack(pady=10)
         app.update_idletasks()
 
-
+    instruction_label = tk.Label(app, text="Press play and wait for someone to join")
+    instruction_label.pack()
     play_button = tk.Button(app, text="Play", command=play_game)
     play_button.pack()
 
 
-
-
-
-
-
 app.mainloop()
-
-
 
 a = input()
 
