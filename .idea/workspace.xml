@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6768f95-be99-4cd2-b520-d0f9adc7f0d1" name="Changes" comment="Almost all works perfectly" />
+    <list default="true" id="a6768f95-be99-4cd2-b520-d0f9adc7f0d1" name="Changes" comment="Game + 1 recording">
+      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -48,6 +54,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/recordings" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.client">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Assign2" />
@@ -233,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718588064884</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Game + 1 recording">
+      <option name="closed" value="true" />
+      <created>1719164880568</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719164880568</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +275,8 @@
     <MESSAGE value="After loging in or signing up successfully we enter the loop in the handle client knowing the id of the user that just logged in." />
     <MESSAGE value="changes" />
     <MESSAGE value="Almost all works perfectly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Almost all works perfectly" />
+    <MESSAGE value="Game + 1 recording" />
+    <option name="LAST_COMMIT_MESSAGE" value="Game + 1 recording" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Assign2$login.coverage" NAME="login Coverage Results" MODIFIED="1716608502830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
